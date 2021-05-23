@@ -29,7 +29,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 */
 </script>
 <body>
-<h1 id="AIM4.0">Attack Improvement Mod 4.0.0 Development Alpha"
+   <h1 id="AIM4.0">Attack Improvement Mod 4.0.0 Development Alpha"</h1>
 
 <p>For BATTLETECH 1.9.1R686(Final) ModTek 8.0 Compatible</p>
 
