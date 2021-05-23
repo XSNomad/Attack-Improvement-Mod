@@ -24,60 +24,9 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
                Warn( "CombatHUDWeaponSlot.SetTargetIndex not found. AggressiveMultiTargetAssignment not patched." );
          }
 
-         if ( Settings.FixMultiTargetBackout ) {
-            TryRun( Log, () => {
-               weaponTargetIndices = MultiTargetType.GetProperty( "weaponTargetIndices", NonPublic | Instance );
-               RemoveTargetedCombatant = MultiTargetType.GetMethod( "RemoveTargetedCombatant", NonPublic | Instance );
-               ClearTargetedActor = MultiTargetType.GetMethod( "ClearTargetedActor", NonPublic | Instance | FlattenHierarchy );
-            } );
-
-            if ( ClearTargetedActor == null )
-               Warn( "Cannot find SelectionStateFireMulti.ClearTargetedActor. MultiTarget backout may be slightly inconsistent." );
-            if ( AnyNull<object>( RemoveTargetedCombatant, weaponTargetIndices ) )
-               Error( "Cannot find RemoveTargetedCombatant or weaponTargetIndices, SelectionStateFireMulti not patched" );
-            else {
-               Patch( HandlerType, "BackOutOneStep", null, "PreventMultiTargetBackout" );
-               Patch( MultiTargetType, "get_CanBackOut", "OverrideMultiTargetCanBackout", null );
-               Patch( MultiTargetType, "BackOut", "OverrideMultiTargetBackout", null );
-               Patch( MultiTargetType, "RemoveTargetedCombatant", "OverrideRemoveTargetedCombatant", null );
-            }
-         }
-
-         if ( Settings.CtrlClickDisableWeapon )
-            MultiTargetDisabledWeaponTarget = new Dictionary<Weapon, ICombatant>();
-         if ( Settings.ShiftKeyReverseSelection ) {
-            SelectNextMethod = HandlerType.GetMethod( "ProcessSelectNext", NonPublic | Instance );
-            SelectPrevMethod = HandlerType.GetMethod( "ProcessSelectPrevious", NonPublic | Instance );
-            if ( AnyNull( SelectNextMethod, SelectPrevMethod ) ) {
-               Warn( "CombatSelectionHandler.ProcessSelectNext and/or ProcessSelectPrevious not found. ShiftKeyReverseSelection not fully patched." );
-            } else {
-               Patch( HandlerType, "ProcessSelectNext", "CheckReverseNextSelection", null );
-               Patch( HandlerType, "ProcessSelectPrevious", "CheckReversePrevSelection", null );
-            }
-         }
-         if ( Settings.CtrlClickDisableWeapon || Settings.ShiftKeyReverseSelection ) {
-            WeaponTargetIndicesProp = MultiTargetType.GetProperty( "weaponTargetIndices", NonPublic | Instance );
-            if ( WeaponTargetIndicesProp == null )
-               Warn( "SelectionStateFireMulti.weaponTargetIndices not found.  Multi-Target weapon shift/ctrl click not patched." );
-            else
-               Patch( MultiTargetType, "CycleWeapon", "OverrideMultiTargetCycle", null );
-         }
-
          if ( Settings.FixLosPreviewHeight )
             Patch( typeof( Pathing ), "UpdateFreePath", null, "FixMoveDestinationHeight" );
 
-         /*
-         if ( Settings.CalloutFriendlyFire ) {
-            Patch( HandlerType, "TrySelectTarget", null, "SuppressSafety" );
-            CombatUI.HookCalloutToggle( ToggleFriendlyFire );
-            Patch( typeof( AbstractActor ), "VisibilityToTargetUnit", "MakeFriendsVisible", null );
-            Patch( typeof( CombatGameState ), "get_AllEnemies", "AddFriendsToEnemies", null );
-            Patch( typeof( CombatGameState ), "GetAllTabTargets", null, "AddFriendsToTargets" );
-            Patch( typeof( SelectionStateFire ), "CalcPossibleTargets", null, "AddFriendsToTargets" );
-            Patch( typeof( SelectionStateFire ), "ProcessClickedCombatant", null, "SuppressHudSafety" );
-            Patch( typeof( SelectionStateFire ), "get_ValidateInfoTargetAsFireTarget", null, "SuppressIFF" );
-         }
-         */
       }
 
       public override void CombatEnds () {
@@ -218,7 +167,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       private static PropertyInfo weaponTargetIndices;
       private static MethodInfo RemoveTargetedCombatant, ClearTargetedActor;
-      private static readonly object[] RemoveTargetParams = new object[]{ null, false };
+      private static object[] RemoveTargetParams = new object[]{ null, false };
 
       [ Harmony.HarmonyPriority( Harmony.Priority.Low ) ]
       public static bool OverrideMultiTargetBackout ( SelectionStateFireMulti __instance, ref ICombatant ___targetedCombatant ) { try {

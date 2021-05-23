@@ -20,8 +20,8 @@ namespace Sheepy.BattleTechMod {
 
    public abstract class BattleMod : BattleModModule {
 
-      public static readonly Logger BTML_LOG = new Logger( "Mods/BTModLoader.log", "BTML log should not be deleted." );
-      public static readonly Logger BT_LOG = new Logger( "BattleTech_Data/output_log.txt", "BattleTech game log should not be deleted." );
+      public static readonly Logger BTML_LOG = new( "Mods/BTModLoader.log", "BTML log should not be deleted." );
+      public static readonly Logger BT_LOG = new( "BattleTech_Data/output_log.txt", "BattleTech game log should not be deleted." );
 
       // Basic mod info for public access, will auto load from assembly then mod.json (if exists)
       public string Version { get; protected set; } = "Unknown";
@@ -174,7 +174,7 @@ namespace Sheepy.BattleTechMod {
 
       // ============ Execution ============
 
-      private static readonly Dictionary<BattleMod, List<BattleModModule>> modules = new Dictionary<BattleMod, List<BattleModModule>>();
+      private static readonly Dictionary<BattleMod, List<BattleModModule>> modules = new();
 
       public BattleMod Add ( BattleModModule module ) {
          if ( ! modules.TryGetValue( this, out List<BattleModModule> list ) )
@@ -259,7 +259,7 @@ namespace Sheepy.BattleTechMod {
                foreach ( MethodBase method in PatchProcessor.AllPatchedMethods() )
                   modList.UnionWith( PatchProcessor.GetPatchInfo( method ).Owners );
                // Some mods may not leave a harmony trace and can only be parsed from log
-               Regex regx = new Regex( " in type \"([^\"]+)\"", RegexOptions.Compiled );
+               Regex regx = new( " in type \"([^\"]+)\"", RegexOptions.Compiled );
                foreach ( string line in File.ReadAllLines( "Mods/BTModLoader.log" ) ) {
                   Match match = regx.Match( line );
                   if ( match.Success ) modList.Add( match.Groups[1].Value );
@@ -331,7 +331,7 @@ namespace Sheepy.BattleTechMod {
 
       public void LogGuiTree ( UnityEngine.Component root ) { LogGuiTree( Log, root ); }
       public static void LogGuiTree ( Logger Log, UnityEngine.Component root ) {
-         StringBuilder buf = new StringBuilder( "GUI Tree:\n" );
+         StringBuilder buf = new( "GUI Tree:\n" );
          buf.EnsureCapacity( 1024 * 16 );
          LogGuiTree( root as UnityEngine.Transform ?? root?.transform, buf, "" );
          Log.Info( buf.ToString() );
@@ -418,7 +418,7 @@ namespace Sheepy.BattleTechMod {
       }
 
       public static IEnumerable<CodeInstruction> LogIL ( IEnumerable<CodeInstruction> input, Logger logger ) {
-         List<CodeInstruction> result = new List<CodeInstruction>( 100 );
+         List<CodeInstruction> result = new( 100 );
          int index = 0;
          foreach ( CodeInstruction code in input ) {
             logger.Info( "{0,3} {1}", index++, code );
@@ -429,7 +429,7 @@ namespace Sheepy.BattleTechMod {
 
       public static IEnumerable<CodeInstruction> ReplaceIL ( IEnumerable<CodeInstruction> input, Func<CodeInstruction,bool> matcher, Func<CodeInstruction,CodeInstruction> replacer, int limit = 0, string action = "anonymous transpiler", Logger logger = null ) {
          int found = 0;
-         List<CodeInstruction> result = new List<CodeInstruction>( 100 );
+         List<CodeInstruction> result = new( 100 );
          foreach ( CodeInstruction code in input ) {
             if ( ( limit <= 0 || found < limit ) && matcher( code ) ) {
                result.Add( replacer( code ) );
@@ -563,7 +563,7 @@ namespace Sheepy.BattleTechMod {
 
       public static string Concat ( this System.Collections.IEnumerable list, string separator = ", ", Func<object,string> formatter = null ) {
          if ( list == null ) return "";
-         StringBuilder result = new StringBuilder();
+         StringBuilder result = new();
          foreach ( object e in list ) {
             if ( result.Length > 0 ) result.Append( separator );
             result.Append( formatter == null ? e?.ToString() : formatter( e ) );
@@ -573,7 +573,7 @@ namespace Sheepy.BattleTechMod {
 
       public static string Concat<TSource> ( this IEnumerable<TSource> list, string separator = ", ", Func<TSource,string> formatter = null ) {
          if ( list == null ) return "";
-         StringBuilder result = new StringBuilder();
+         StringBuilder result = new();
          foreach ( TSource e in list ) {
             if ( result.Length > 0 ) result.Append( separator );
             result.Append( formatter == null ? e?.ToString() : formatter( e ) );

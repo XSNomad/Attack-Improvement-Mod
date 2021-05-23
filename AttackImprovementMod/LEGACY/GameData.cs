@@ -1,3 +1,5 @@
+//No longer needed 5.23.21
+/*
 using BattleTech;
 using System;
 using System.Collections.Generic;
@@ -97,4 +99,4 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       private static string PPC_STATUS = "{\"durationData\":{\"duration\":1,\"ticksOnActivations\":true,\"useActivationsOfTarget\":true,\"ticksOnEndOfRound\":false,\"ticksOnMovements\":false,\"stackLimit\":0,\"clearedWhenAttacked\":false},\"targetingData\":{\"effectTriggerType\":\"OnHit\",\"triggerLimit\":0,\"extendDurationOnTrigger\":0,\"specialRules\":\"NotSet\",\"effectTargetType\":\"NotSet\",\"range\":0,\"forcePathRebuild\":false,\"forceVisRebuild\":false,\"showInTargetPreview\":true,\"showInStatusPanel\":true},\"effectType\":\"StatisticEffect\",\"Description\":{\"Id\":\"AbilityDefPPC\",\"Name\":\"SENSORS IMPAIRED\",\"Details\":\"[AMT] Difficulty to all of this unit's attacks until its next activation.\",\"Icon\":\"uixSvgIcon_status_sensorsImpaired\"},\"nature\":\"Debuff\",\"statisticData\":{\"appliesEachTick\":false,\"effectsPersistAfterDestruction\":false,\"statName\":\"AccuracyModifier\",\"operation\":\"Float_Add\",\"modValue\":\"1.0\",\"modType\":\"System.Single\",\"additionalRules\":\"NotSet\",\"targetCollection\":\"NotSet\",\"targetWeaponCategory\":\"NotSet\",\"targetWeaponType\":\"NotSet\",\"targetAmmoCategory\":\"NotSet\",\"targetWeaponSubType\":\"NotSet\"},\"tagData\":null,\"floatieData\":null,\"actorBurningData\":null,\"vfxData\":null,\"instantModData\":null,\"poorlyMaintainedEffectData\":null}";
    }
-}
+}*/

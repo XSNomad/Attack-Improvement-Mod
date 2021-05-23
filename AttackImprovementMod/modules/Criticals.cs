@@ -157,8 +157,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
         // ============ Generic Critical System Core ============
 
-        private static Dictionary<int, float> damages = new Dictionary<int, float>();
-        private static readonly Dictionary<int, float> damaged = new Dictionary<int, float>();
+        private static Dictionary<int, float> damages = new();
+        private static readonly Dictionary<int, float> damaged = new();
 
         public static void CheckForAllCrits ( AIMCritInfo info ) { try {
          if ( DebugLog ) Verbo( "Start crit check on {0} by {1}", info.target, info.weapon );
@@ -340,7 +340,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       }
 
       public static List<MechComponent> ListComponentsAtLocation ( AbstractActor me, int location ) {
-         List<MechComponent> list = new List<MechComponent>( 0 );
+         List<MechComponent> list = new( 0 );
          foreach ( MechComponent component in me.allComponents ) {
             int componentLocation = component.Location;
             int flag = componentLocation & location;
@@ -458,14 +458,15 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       public static void EnableNonMechCrit ( AbstractActor __instance, WeaponHitInfo hitInfo ) { try {
          AttackDirector.AttackSequence attackSequence = GetAttackSequence( hitInfo );
          Weapon weapon = attackSequence?.GetWeapon( hitInfo.attackGroupIndex, hitInfo.attackWeaponIndex );
-         //MeleeAttackType meleeAttackType = attackSequence.meleeAttackType;
-         if      ( __instance is Vehicle vehicle ) CheckForAllCrits( new AIMVehicleInfo( vehicle, hitInfo, weapon ) );
+                //MeleeAttackType meleeAttackType = attackSequence.meleeAttackType;
+                if      ( __instance is Vehicle vehicle ) CheckForAllCrits( new AIMVehicleInfo( vehicle, hitInfo, weapon ) );
          else if ( __instance is Turret  turret  ) CheckForAllCrits( new AIMTurretInfo ( turret , hitInfo, weapon ) );
-      }                 catch ( Exception ex ) { Error( ex ); } }
+      }                 catch ( Exception ex ) { Error( ex ); }}
 
-      // ============ ThroughArmorCritical ============
 
-      private static bool allowConsolidateOnce = true;
+        // ============ ThroughArmorCritical ============
+
+        private static bool allowConsolidateOnce = true;
 
       public static void ReplaceCritHandling ( Mech __instance, WeaponHitInfo hitInfo, Weapon weapon, MeleeAttackType meleeAttackType ) {
          CheckForAllCrits( new AIMMechCritInfo( __instance, hitInfo, weapon ) );
@@ -511,7 +512,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       public static void RemoveFullStructureLocationsFromCritList ( Dictionary<int, float> __result ) { try {
          if ( thisCritMech == null ) return;
-         HashSet<int> removeList = new HashSet<int>();
+         HashSet<int> removeList = new();
          __result.Remove( (int) ArmorLocation.None );
          __result.Remove( (int) ArmorLocation.Invalid );
          foreach ( int armourInt in __result.Keys ) {

@@ -18,37 +18,10 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       public override void GameStartsOnce () {
          // Done on game load to be effective in campaign mech bay
-         Type ReadoutType = typeof( HUDMechArmorReadout );
-         if ( Settings.ShowUnderArmourDamage || Settings.FixPaperDollRearStructure )
-            TryRun( Log, () => {
-               outlineProp = ReadoutType.GetProperty( "armorOutlineCached", NonPublic | Instance );
-               armorProp = ReadoutType.GetProperty( "armorCached", NonPublic | Instance );
-               structureProp = ReadoutType.GetProperty( "structureCached", NonPublic | Instance );
-               outlineRearProp = ReadoutType.GetProperty( "armorOutlineRearCached", NonPublic | Instance );
-               armorRearProp = ReadoutType.GetProperty( "armorRearCached", NonPublic | Instance );
-               structureRearProp = ReadoutType.GetProperty( "structureRearCached", NonPublic | Instance );
-               timeSinceStructureDamagedProp = typeof( HUDMechArmorReadout ).GetProperty( "timeSinceStructureDamaged", NonPublic | Instance );
-            } );
-         if ( Settings.ShowUnderArmourDamage ) {
-            if ( AnyNull( outlineProp, armorProp, structureProp, outlineRearProp, armorRearProp, structureRearProp ) )
-               Error( "Cannot find outline, armour, and/or structure colour cache of HUDMechArmorReadout.  Cannot make paper dolls divulge under skin damage." );
-            else {
-               if ( ! Settings.FixPaperDollRearStructure )
-                  Warn( "PaperDollDivulgeUnderskinDamage does not imply FixPaperDollRearStructure. Readout may still be bugged." );
-               Patch( ReadoutType, "RefreshMechStructureAndArmor", null, "ShowStructureDamageThroughArmour" );
-            }
-         }
-         if ( Settings.FixPaperDollRearStructure ) {
-            if ( structureRearProp == null || timeSinceStructureDamagedProp == null )
-               Error( "Cannot find HUDMechArmorReadout.structureRearCached, and/or HUDMechArmorReadout.timeSinceStructureDamaged, paper doll rear structures not fixed." );
-            else
-               Patch( typeof( HUDMechArmorReadout ), "UpdateMechStructureAndArmor", null, "FixRearStructureDisplay" );
-         }
          // Must be placed here to have effect
          if ( Settings.LabelPaperDollSide )
             Patch( typeof( HUDMechArmorReadout ), "Init", null, "AddPaperDollSideLabel" );
       }
-
       public override void CombatStartsOnce () {
          if ( Settings.ShowNumericInfo ) {
             Patch( typeof( CombatHUDActorDetailsDisplay ), "RefreshInfo", null, "ShowNumericInfo" );
@@ -257,7 +230,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          if ( target == null ) return;
          string prefix = null, numbers = null, postfix = null;
 
-         StringBuilder text = new StringBuilder( 100 );
+         StringBuilder text = new( 100 );
          if ( __instance == TargetDisplay && IsCalloutPressed && target.GetPilot() is Pilot pilot ) {
             foreach ( Ability ability in pilot.Abilities ) {
                if ( ability?.Def == null || ! ability.Def.IsPrimaryAbility ) continue;
@@ -415,7 +388,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          else return;
 
          // Get effect list from previewed movement path
-         HashSet<DesignMaskDef> masks = new HashSet<DesignMaskDef>();
+         HashSet<DesignMaskDef> masks = new();
          List<Effect> ownEffects = null;
          DesignMaskDef local = __instance.occupiedDesignMask, preview = Combat.MapMetaData.GetPriorityDesignMaskAtPos( position );
          if ( preview != null ) masks.Add( preview );

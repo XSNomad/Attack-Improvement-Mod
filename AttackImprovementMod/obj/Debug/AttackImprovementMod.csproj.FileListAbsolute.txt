@@ -1,0 +1,7 @@
+C:\Users\Dadderino\source\repos\Attack-Improvement-Mod\AttackImprovementMod\obj\Debug\AttackImprovementMod.csprojAssemblyReference.cache
+C:\Users\Dadderino\source\repos\Attack-Improvement-Mod\AttackImprovementMod\obj\Debug\AttackImprovementMod.csproj.CoreCompileInputs.cache
+C:\Users\Dadderino\source\repos\Attack-Improvement-Mod\AttackImprovementMod\obj\Debug\AttackImprovementMod.csproj.CopyComplete
+C:\Users\Dadderino\source\repos\Attack-Improvement-Mod\AttackImprovementMod\obj\Debug\AttackImprovementMod.dll
+C:\Users\Dadderino\source\repos\Attack-Improvement-Mod\AttackImprovementMod\obj\Debug\AttackImprovementMod.pdb
+C:\Users\Dadderino\source\repos\Attack-Improvement-Mod\AttackImprovementMod.dll
+C:\Users\Dadderino\source\repos\Attack-Improvement-Mod\AttackImprovementMod.pdb

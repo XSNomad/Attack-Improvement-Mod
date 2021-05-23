@@ -59,7 +59,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             Warn( "Can't find JumpPathing.Mech. MaxMeleeVerticalOffsetByClass not patched." );
             return false;
          }
-         List<float> list = new List<float>();
+         List<float> list = new();
          foreach ( string e in Settings.MaxMeleeVerticalOffsetByClass.Split( ',' ) ) try {
             if ( list.Count >= 4 ) break;
             float offset = float.Parse( e.Trim() );

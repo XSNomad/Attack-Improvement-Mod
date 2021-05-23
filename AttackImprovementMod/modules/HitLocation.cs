@@ -150,7 +150,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       }                 catch ( Exception ex ) { Error( ex ); } }
 
       public static Dictionary<T, int> ScaleHitTable <T> ( Dictionary<T, int> input ) {
-         Dictionary<T, int> output = new Dictionary<T, int>( input.Count );
+         Dictionary<T, int> output = new( input.Count );
          foreach ( var pair in input ) output.Add( pair.Key, pair.Value * SCALE );
          return output;
       }

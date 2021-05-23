@@ -137,7 +137,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          ArchiveOldAttackLog();
 
          if ( ! ROLL_LOG.Exists() ) {
-            StringBuilder logBuffer = new StringBuilder();
+            StringBuilder logBuffer = new();
             logBuffer.Append( string.Join( Separator, new string[]{ "Log v2.1", "Actor", "Pilot", "Unit", "Target", "Pilot", "Unit", "Combat Id", "Round", "Phase", "Attack Id", "Direction", "Range" } ) );
             // LogShot
             logBuffer.Append( Separator ).Append( string.Join( Separator, new string[]{ "Weapon", "Weapon Template", "Weapon Id", "Hit Roll", "Corrected", "Streak", "Final", "Hit%" } ) );
@@ -168,7 +168,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       private static List<int> hitList; // Used to assign damage information
       private static Dictionary<string, int> hitMap; // Used to assign critical hit information
-      private static readonly List<string> log = new List<string>( 32 );
+      private static readonly List<string> log = new( 32 );
 
       private static void ForceWriteLog () {
          if ( log.Count <= 0 ) return;
@@ -214,13 +214,13 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          return weapon + "/" + hitLocation?.ToString() + "/" + targetId;
       }
 
-      private static readonly List<string> blankCache = new List<string>(12);
+      private static readonly List<string> blankCache = new(12);
 
       private static string FillBlanks ( int blankCount ) {
          while ( blankCache.Count <= blankCount ) blankCache.Add( null );
          string result = blankCache[ blankCount ];
          if ( result == null ) {
-            StringBuilder buf = new StringBuilder( blankCount * 3 );
+            StringBuilder buf = new( blankCount * 3 );
             for ( int i = blankCount ; i > 0 ; i-- )
                buf.Append( Separator ).Append( "--" );
             result = blankCache[ blankCount ] = buf.ToString();
@@ -259,7 +259,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          // First, rename existing log to clear the way for this launch
          if ( ROLL_LOG.Exists() ) try {
             string from = ROLL_LOG.LogFile;
-            FileInfo info = new FileInfo( from );
+            FileInfo info = new( from );
             if ( info.Length > 500 ) {
                string to = ModLogDir + "Log_Attack." + TimeToFilename( info.LastWriteTimeUtc ) + Path.GetExtension( from );
                Info( "Archiving attack log to {1}", from, to );

@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions2.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Mirrorlect.cs" />
     <Compile Include="Mod.cs" />
@@ -107,7 +108,7 @@
     <Compile Include="modules\Targetting.cs" />
     <Compile Include="modules\UserInterfacePanels.cs" />
     <Compile Include="modules\HeauUpDisplay.cs" />
-    <Compile Include="modules\GameData.cs" />
+    <Compile Include="LEGACY\GameData.cs" />
     <Compile Include="modules\WeaponInformation.cs" />
   </ItemGroup>
   <ItemGroup>

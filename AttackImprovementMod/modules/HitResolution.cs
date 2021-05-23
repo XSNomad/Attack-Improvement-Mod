@@ -107,7 +107,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       }                 catch ( Exception ex ) { Error( ex ); } }
 
       public static void SetImpact ( MessageCenterMessage message ) {
-         if ( ! ( message is AttackSequenceImpactMessage impactMessage ) ) return;
+         if ( message is not AttackSequenceImpactMessage impactMessage  ) return;
          WeaponHitInfo info = impactMessage.hitInfo;
          currentImpact = info.attackSequenceId;
          currentRoll = (impactMessage.hitIndex < info.toHitRolls.Length)?info.toHitRolls[ impactMessage.hitIndex ]:0f;
@@ -130,7 +130,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ Harmony.HarmonyPriority( Harmony.Priority.Low ) ]
       public static bool OverrideDecrementAmmo ( Weapon __instance, ref int __result, int stackItemUID ) { try {
          Weapon me = __instance;
-         if ( me.AmmoCategoryValue.Is_NotSet || ! ( me.parent is Mech mech ) ) return true;
+         if ( me.AmmoCategoryValue.Is_NotSet || me.parent is not Mech mech  ) return true;
          if ( ! FriendOrFoe( mech, Settings.BalanceAmmoConsumption, Settings.BalanceEnemyAmmoConsumption ) ) return true;
 
          int needAmmo = __result = me.ShotsWhenFired;
@@ -192,7 +192,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          if ( boxes.Count <= 1 ) return null;
          IComparer<ChassisLocations> comparer = LocationSorter( mech );
          // Load order with explosion risks: CT > Head > LT/RT > LA/RA > LL/RL (prioritising the weaker side).
-         Dictionary<ChassisLocations, int> locationOrder = new Dictionary<ChassisLocations, int> {
+         Dictionary<ChassisLocations, int> locationOrder = new()
+         {
             { ChassisLocations.CenterTorso, 1 },
             { ChassisLocations.Head, 2 },
             { ChassisLocations.LeftTorso, 5 },
@@ -231,7 +232,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       private static Dictionary<ChassisLocations, int> SortLocationByRisk ( Mech mech, List<AmmunitionBox> boxes ) {
          if ( boxes.Count <= 1 ) return null;
          // Load order when no explosion risks: LT/RT/LA/RA/LL/RL > CT > Head
-         Dictionary<ChassisLocations, int> locationOrder = new Dictionary<ChassisLocations, int> {
+         Dictionary<ChassisLocations, int> locationOrder = new()
+         {
             { ChassisLocations.CenterTorso, 9 },
             { ChassisLocations.Head, 8 }
          };
@@ -343,8 +345,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          if ( mech == null || mech.IsDead || mech.HasMovedThisRound || mech.IsProne || mech.IsShutDown ) return;
          if ( ! FriendOrFoe( mech, Settings.AutoJettisonAmmo, Settings.AutoJettisonEnemyAmmo ) ) return;
 
-         Dictionary<AmmoCategory, bool> checkedType = new Dictionary<AmmoCategory, bool>();
-         List<AmmunitionBox> jettison = new List<AmmunitionBox>();
+         Dictionary<AmmoCategory, bool> checkedType = new();
+         List<AmmunitionBox> jettison = new();
          foreach ( AmmunitionBox box in mech.ammoBoxes ) {
             if ( box.CurrentAmmo <= 0 ) continue;
             AmmoCategory type = (AmmoCategory)box.ammoCategoryValue.ID ;

@@ -15,11 +15,6 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ JsonSection( "User Interfaces" ) ]
       //
 
-      [ JsonComment( new string[]{
-        "Fix Multi-Target cancelling so that you can cancel target by target without leaving MT mode.  Default true.",
-        "You can still quickly switch out of Multi-Target by pressing another action." } ) ]
-      public bool FixMultiTargetBackout = true;
-
       [ JsonComment( "When a target is selected/deselected during Multi-Target, aggressively reassign enabled weapons by hit chance.  Default true." ) ]
       public bool AggressiveMultiTargetAssignment = true;
 
@@ -34,9 +29,6 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       [ JsonComment( "Ctrl click on a weapon in Multi-Target mode will enable/disable the weapon.  Default true." ) ]
       public bool CtrlClickDisableWeapon = true;
-
-      [ JsonComment( "Fix the bug that rear paper doll is incorrectly showing front structure.  Default true." ) ]
-      public bool FixPaperDollRearStructure = true;
 
       [ JsonComment( "Add L and R label to paper doll.  Default true." ) ]
       public bool LabelPaperDollSide = true;

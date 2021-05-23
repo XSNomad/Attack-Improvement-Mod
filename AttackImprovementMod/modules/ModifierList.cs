@@ -105,7 +105,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       internal static void InitModifiers ( ref Dictionary<string, Func<AttackModifier>> list, Func<string,Func<AttackModifier>> mapper, string[] factors ) {
          list = new Dictionary<string, Func<AttackModifier>>();
-         HashSet<string> Factors = new HashSet<string>();
+         HashSet<string> Factors = new();
          foreach ( string e in factors ) Factors.Add( e?.Trim().ToLower() );
          foreach ( string e in Factors ) {
             Func<AttackModifier> factor = null;
@@ -252,7 +252,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             return () => {
                Weapon w = AttackWeapon;
                float range = Vector3.Distance( AttackPos, TargetPos ), modifier = Hit.GetRangeModifierForDist( w, range );
-               AttackModifier result = new AttackModifier( modifier );
+               AttackModifier result = new( modifier );
                if ( range < w.MinRange ) return result.SetName( $"MIN RANGE (<{(int)w.MinRange}m)" );
                if ( range < w.ShortRange ) return result.SetName( "SHORT RANGE" + SmartRange( w.MinRange, range, w.ShortRange ) );
                if ( range < w.MediumRange ) return result.SetName( "MED RANGE" + SmartRange( w.ShortRange, range, w.MediumRange ) );
@@ -299,8 +299,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
          case "weapondamage" :
             return () => {
-               AttackModifier result = new AttackModifier( "WEAPON DAMAGED" );
-               if ( ! ( Attacker is Mech mech ) ) return result;
+               AttackModifier result = new( "WEAPON DAMAGED" );
+               if ( Attacker is not Mech mech  ) return result;
                return result.SetValue( MechStructureRules.GetToHitModifierWeaponDamage( mech, AttackWeapon ) );
             };
          }
@@ -351,8 +351,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       public static Func<AttackModifier> GetMeleeModifierFactor ( string factorId ) {
          switch ( factorId ) {
          case "armmounted":
-            return () => { AttackModifier result = new AttackModifier( "PUNCHING ARM" );
-               if ( AttackType == MeleeAttackType.DFA || Target is Vehicle || Target.IsProne || ! ( Attacker is Mech mech ) ) return result;
+            return () => { AttackModifier result = new( "PUNCHING ARM" );
+               if ( AttackType == MeleeAttackType.DFA || Target is Vehicle || Target.IsProne || Attacker is not Mech mech  ) return result;
                if ( mech.MechDef.Chassis.PunchesWithLeftArm ) {
                   if ( mech.IsLocationDestroyed( ChassisLocations.LeftArm ) ) return result;
                } else if ( mech.IsLocationDestroyed( ChassisLocations.RightArm ) ) return result;
@@ -363,7 +363,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             return () => new AttackModifier( "DEATH FROM ABOVE", Hit.GetDFAModifier( AttackType ) );
 
          case "height":
-            return () => { AttackModifier result = new AttackModifier( "HEIGHT DIFF" );
+            return () => { AttackModifier result = new( "HEIGHT DIFF" );
                if ( AttackType == MeleeAttackType.DFA )
                   return result.SetValue( Hit.GetHeightModifier( Attacker.CurrentPosition.y, Target.CurrentPosition.y ) );
                float diff = AttackPos.y - Target.CurrentPosition.y;
@@ -382,8 +382,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             return () => new AttackModifier( Hit.GetMeleeChassisToHitModifier( Attacker, AttackType ) ).SetName( "CHASSIS PENALTY", "CHASSIS BONUS" );
 
          case "targetevasion" :
-            return () => { AttackModifier result = new AttackModifier( "TARGET MOVED" );
-               if ( ! ( Target is AbstractActor actor ) ) return result;
+            return () => { AttackModifier result = new( "TARGET MOVED" );
+               if ( Target is not AbstractActor actor  ) return result;
                return result.SetValue( Hit.GetEvasivePipsModifier( actor.EvasivePipsCurrent, AttackWeapon ) );
             };
 

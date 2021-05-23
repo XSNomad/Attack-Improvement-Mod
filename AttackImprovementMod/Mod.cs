@@ -6,9 +6,9 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
    public class Mod : BattleMod {
 
-      public static ModSettings Settings = new ModSettings();
+      public static ModSettings Settings = new();
 
-      public static void Init ( string directory, string settingsJSON ) {
+      public static void Init () {
          new Mod().Start( ref ModLog );
          ModLog.LogLevel = System.Diagnostics.SourceLevels.Verbose;
       }
@@ -19,7 +19,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
          NormaliseSettings();
          new Logger( LogDir + "Log_AttackImprovementMod.txt" ).Delete(); // Delete log of old version
 
-         Add( new GameData(){ Name = "Stat Fixes" } );
+         //Add( new GameData(){ Name = "Stat Fixes" } );
          Add( new HeauUpDisplay(){ Name = "Head Up Display" } ); // Created first to prepare callout handling
          Add( new UserInterfacePanels(){ Name = "User Interface Panels" } );
          Add( new Targetting(){ Name = "Targetting" } );
@@ -50,43 +50,95 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             Log.Info( "{2} {0} Version {1} In {3}\r\n", Name, Version, DateTime.Now.ToString( "s" ), BaseDir );
          }
 
-#pragma warning disable CS0618 // Disable "this is obsolete" warnings since we must read them to upgrade them.
+#pragma warning disable CS0618 // Type or member is obsolete
          MigrateColors( settings.LOSMeleeColor      , ref settings.LOSMeleeColors       );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          MigrateColors( settings.LOSClearColor      , ref settings.LOSClearColors       );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          MigrateColors( settings.LOSBlockedPreColor , ref settings.LOSBlockedPreColors  );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          MigrateColors( settings.LOSBlockedPostColor, ref settings.LOSBlockedPostColors );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          MigrateColors( settings.LOSIndirectColor   , ref settings.LOSIndirectColors    );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.LOSNoAttackColor != null && settings.LOSNoAttackColors == null)
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             settings.LOSNoAttackColors = settings.LOSNoAttackColor;
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.PersistentLog != null )
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             settings.AttackLogArchiveMaxMB = settings.PersistentLog == false ? 4 : 64;
+#pragma warning restore CS0618 // Type or member is obsolete
 
+#pragma warning disable CS0618 // Type or member is obsolete
          settings.ShowUnderArmourDamage = settings.PaperDollDivulgeUnderskinDamage.GetValueOrDefault( settings.ShowUnderArmourDamage );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          settings.KillZeroHpLocation = settings.FixNonIntegerDamage.GetValueOrDefault( settings.KillZeroHpLocation );
+#pragma warning restore CS0618 // Type or member is obsolete
 
+#pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.LOSWidthMultiplier != null && settings.LOSWidthMultiplier != 2 )
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             settings.LOSWidth = settings.LOSWidthMultiplier.GetValueOrDefault( 2 );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.LOSWidthBlockedMultiplier != null && settings.LOSWidthBlockedMultiplier != 3 )
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             settings.LOSWidthBlocked = settings.LOSWidthBlockedMultiplier.GetValueOrDefault( 3 ) * 0.75m;
+#pragma warning restore CS0618 // Type or member is obsolete
 
+#pragma warning disable CS0618 // Type or member is obsolete
          settings.ShowCorrectedHitChance = settings.ShowRealWeaponHitChance.GetValueOrDefault( settings.ShowCorrectedHitChance );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.ShowDecimalCalledChance == true && settings.CalledChanceFormat == "" )
+#pragma warning restore CS0618 // Type or member is obsolete
             settings.CalledChanceFormat = "{0:0.0}%"; // Keep digits consistent
          // if ( old.ShowDecimalHitChance == true ); // Use new default either way, don't change
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.LogHitRolls == true && ( settings.AttackLogLevel == null || settings.AttackLogLevel.Trim().ToLower() == "none" ) )
+#pragma warning restore CS0618 // Type or member is obsolete
             settings.AttackLogLevel = "All";
 
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.ThroughArmorCritChanceZeroArmor != null )
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             settings.CritChanceZeroArmor = settings.ThroughArmorCritChanceZeroArmor.GetValueOrDefault( 0 );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.ThroughArmorCritChanceFullArmor != null )
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             settings.CritChanceFullArmor = settings.ThroughArmorCritChanceFullArmor.GetValueOrDefault( 0 );
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.ShowHeatAndStab == false )
+#pragma warning restore CS0618 // Type or member is obsolete
             settings.ShowNumericInfo = false;
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.SkipCritingDeadMech == false )
+#pragma warning restore CS0618 // Type or member is obsolete
             settings.SkipBeatingDeadMech = "";
+#pragma warning disable CS0618 // Type or member is obsolete
          if ( settings.MultupleCrits == false )
+#pragma warning restore CS0618 // Type or member is obsolete
             settings.MultipleCrits = false;
-#pragma warning restore CS0618
 
          RangeCheck( "LoadoutColourSaturation", ref settings.SaturationOfLoadout, 0, 1 );
          RangeCheck( "SpecialTerrainDotSize", ref settings.SpecialTerrainDotSize, 0, 10 );

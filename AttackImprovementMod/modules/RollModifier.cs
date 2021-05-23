@@ -71,7 +71,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       private static float[] steppingModifier, diminishingBonus, diminishingPenalty;
 
       private static void FillSteppedModifiers () {
-         List<float> mods = new List<float>(22);
+         List<float> mods = new(22);
          float lastMod = float.NaN;
          for ( int i = 1 ; ; i++ ) {
             float mod = GetSteppedModifier( i );
@@ -230,7 +230,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       // Set self walked modifier when previewing movement
       public static void Preview_SelfSpeedModifier ( ref float __result, AbstractActor attacker ) { try {
-         if ( __result != 0 || ! ( attacker is Mech mech ) || mech.HasMovedThisRound || ! ( ActiveState is SelectionStateMoveBase ) ) return;
+         if ( __result != 0 || attacker is not Mech mech  || mech.HasMovedThisRound || ! ( ActiveState is SelectionStateMoveBase ) ) return;
          float movement = Vector3.Distance( mech.CurrentPosition, ActiveState.PreviewPos );
          if ( movement <= 10 ) return;
          switch ( mech.weightClass ) {
@@ -243,7 +243,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       // Set self sprint modifier when previewing movement
       public static void Preview_SelfSprintedModifier ( ref float __result, AbstractActor attacker ) { try {
-         if ( __result != 0 || ! ( attacker is Mech mech ) || mech.HasSprintedThisRound || ! ( ActiveState is SelectionStateSprint ) ) return;
+         if ( __result != 0 || attacker is not Mech mech  || mech.HasSprintedThisRound || ! ( ActiveState is SelectionStateSprint ) ) return;
          __result = CombatConstants.ToHit.ToHitSelfSprinted;
       }                 catch ( Exception ex ) { Error( ex ); } }
 

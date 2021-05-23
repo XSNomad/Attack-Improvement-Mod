@@ -20,8 +20,8 @@ namespace Sheepy.Reflector {
             Console.WriteLine( string.Format( msg, args ) );
       };
 
-      private readonly List<Assembly> Assemblies = new List<Assembly>();
-      private readonly Dictionary<Assembly, HashSet<string>> Namespaces = new Dictionary<Assembly, HashSet<string>>();
+      private readonly List<Assembly> Assemblies = new();
+      private readonly Dictionary<Assembly, HashSet<string>> Namespaces = new();
 
       // ============ Constructor and Static access ============
 
@@ -95,7 +95,7 @@ namespace Sheepy.Reflector {
 
       private R ParseAndProcess<R> ( string input, string actionName, Func<string,TextParser,R> action ) { try {
          Log( ActivityTracing, "{0} {1}", actionName, input );
-         TextParser state = new TextParser( input );
+         TextParser state = new( input );
          R parsed = action( input, state );
          state.MustBeEmpty();
          return parsed;
@@ -129,7 +129,7 @@ namespace Sheepy.Reflector {
       }
 
       private List<MemberPart> MatchMemberList ( TextParser state ) {
-         List<MemberPart> result = new List<MemberPart>();
+         List<MemberPart> result = new();
          MemberPart nextMatch;
          do {
             nextMatch = MatchMember( state );
@@ -185,29 +185,25 @@ namespace Sheepy.Reflector {
 
       // ============ Parser State ============
 
-      private static readonly Dictionary<string, Type> shortTypes = new Dictionary<string, Type>();
+      private static readonly Dictionary<string, Type> shortTypes = new();
 
       private static void BuildTypeMap () { lock( shortTypes ) {
          if ( shortTypes.Count > 0 ) return;
-         using ( var provider = new CSharpCodeProvider() ) {
-            Assembly mscorlib = Assembly.GetAssembly( typeof( int ) );
-            foreach ( Type type in mscorlib.GetTypes() ) {
-               if ( type.Namespace != "System" ) continue;
-               var typeRef = new CodeTypeReference(type);
-               var csTypeName = provider.GetTypeOutput(typeRef);
-               if ( csTypeName.IndexOf( '.' ) >= 0 ) continue;
-               shortTypes.Add( csTypeName, type );
-            }
-         }
-      } }
+                using var provider = new CSharpCodeProvider(); Assembly mscorlib = Assembly.GetAssembly(typeof(int));
+                foreach (Type type in mscorlib.GetTypes()){
+                    if (type.Namespace != "System") continue;
+                    var typeRef = new CodeTypeReference(type);
+                    var csTypeName = provider.GetTypeOutput(typeRef);
+                    if (csTypeName.IndexOf('.') >= 0) continue;
+                    shortTypes.Add(csTypeName, type);}}}
    }
 
    public class CachedMirrorlect : Mirrorlect {
 
-      private static readonly ReaderWriterLockSlim typeCacheLock   = new ReaderWriterLockSlim( LockRecursionPolicy.NoRecursion ),
-                                          parserCacheLock = new ReaderWriterLockSlim( LockRecursionPolicy.NoRecursion );
-      private static readonly Dictionary<string,Type> typeCache = new Dictionary<string, Type>();
-      private static readonly Dictionary<string,WeakReference> parserCache = new Dictionary<string,WeakReference>();
+      private static readonly ReaderWriterLockSlim typeCacheLock   = new( LockRecursionPolicy.NoRecursion ),
+                                          parserCacheLock = new( LockRecursionPolicy.NoRecursion );
+      private static readonly Dictionary<string,Type> typeCache = new();
+      private static readonly Dictionary<string,WeakReference> parserCache = new();
 
       // ============ Overrides ============
 
@@ -355,7 +351,7 @@ namespace Sheepy.Reflector {
          if ( Parent != null ) buffer.Append( Parent ).Append( '.' );
          if ( GenericTypes == null && Parameters == null ) return buffer.Append( _MemberName );
          if ( _ToString != null ) return buffer.Append( _ToString );
-         StringBuilder buf = new StringBuilder();
+         StringBuilder buf = new();
          buf.Append( MemberName );
          if ( GenericTypes != null ) {
             buf.Append( '<' );

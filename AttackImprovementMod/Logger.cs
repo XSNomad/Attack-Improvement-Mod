@@ -36,7 +36,7 @@ namespace Sheepy.Logging {
       public class LogEntry { public DateTime time; public SourceLevels level; public object message; public object[] args; }
 
       // Worker states locked by queue which is private.
-      private readonly HashSet<string> exceptions = new HashSet<string>(); // Double as public get/set lock object
+      private readonly HashSet<string> exceptions = new(); // Double as public get/set lock object
       private readonly List<LogEntry> queue;
       private Thread worker;
       private int writeDelay;
@@ -88,7 +88,7 @@ namespace Sheepy.Logging {
 
       public void Log ( SourceLevels level, object message, params object[] args ) {
          if ( ( level & LogLevel ) != level ) return;
-         LogEntry entry = new LogEntry(){ time = DateTime.Now, level = level, message = message, args = args };
+         LogEntry entry = new(){ time = DateTime.Now, level = level, message = message, args = args };
          if ( queue != null ) lock ( queue ) {
             if ( worker == null ) throw new InvalidOperationException( "Logger already disposed." );
             queue.Add( entry );
@@ -156,7 +156,7 @@ namespace Sheepy.Logging {
 
       private bool? OutputLog ( IEnumerable<Func<LogEntry,bool>> filters, params LogEntry[] entries ) {
          if ( entries.Length <= 0 ) return null;
-         StringBuilder buf = new StringBuilder();
+         StringBuilder buf = new();
          lock ( exceptions ) { // Not expecting settings to change frequently. Lock outside format loop for higher throughput.
             foreach ( LogEntry line in entries ) try {
                if ( filters != null ) foreach ( Func<LogEntry,bool> filter in filters ) try {
