@@ -1,0 +1,17 @@
+{
+   "Name" : "AIM: Attack Improvement Mod",
+   "Enabled" : true,
+
+   "Version" : "4.0.0 Dev Alpha",
+   "Description" : "For BattleTech 1.9.1. Fix, enhance, and upgrade the attack experience, from Line of Sight to Hit Distribution. Each feature can be configured individually.",
+   "Author" : "Sheepy: Rebuild by XSNomad for 1.9.1",
+   "Website" : "https://github.com/XSNomad/Attack-Improvement-Mod",
+   "Contact" : "fake@email.de",
+
+   "DLL" : "AttackImprovementMod.dll",
+   "DLLEntryPoint" : "Sheepy.BattleTechMod.AttackImprovementMod.Mod.Init",
+
+   "Settings" : {
+      "settings.json" : "The mod use settings.json to read and write settings.  If the file does not exist, it will be created when the mod is loaded on game launch.",
+   }
+}

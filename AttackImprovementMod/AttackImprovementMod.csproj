@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sheepy.AttackImprovementMod</RootNamespace>
     <AssemblyName>AttackImprovementMod</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,27 +32,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\BATTLETECH\BattleTech_Data\Managed\0Harmony.dll</HintPath>
+      <HintPath>0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\BATTLETECH\BattleTech_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\BATTLETECH\BattleTech_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>Assembly-CSharp-firstpass.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\BATTLETECH\BattleTech_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -61,41 +64,41 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\BATTLETECH\BattleTech_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\BATTLETECH\BattleTech_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Logger.cs" />
-    <Compile Include="src\Mirrorlect.cs" />
-    <Compile Include="src\Mod.cs" />
-    <Compile Include="src\BattleMod.cs" />
-    <Compile Include="src\ModSettings.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Mirrorlect.cs" />
+    <Compile Include="Mod.cs" />
+    <Compile Include="BattleMod.cs" />
+    <Compile Include="ModSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\modules\AttackLog.cs" />
-    <Compile Include="src\modules\CalledShotPopUp.cs" />
-    <Compile Include="src\modules\Criticals.cs" />
-    <Compile Include="src\modules\ModifierList.cs" />
-    <Compile Include="src\modules\HitResolution.cs" />
-    <Compile Include="src\modules\LineOfSight.cs" />
-    <Compile Include="src\modules\Melee.cs" />
-    <Compile Include="src\modules\RollCorrection.cs" />
-    <Compile Include="src\modules\RollModifier.cs" />
-    <Compile Include="src\modules\HitLocation.cs" />
-    <Compile Include="src\modules\Targetting.cs" />
-    <Compile Include="src\modules\UserInterfacePanels.cs" />
-    <Compile Include="src\modules\HeauUpDisplay.cs" />
-    <Compile Include="src\modules\GameData.cs" />
-    <Compile Include="src\modules\WeaponInformation.cs" />
+    <Compile Include="modules\AttackLog.cs" />
+    <Compile Include="modules\CalledShotPopUp.cs" />
+    <Compile Include="modules\Criticals.cs" />
+    <Compile Include="modules\ModifierList.cs" />
+    <Compile Include="modules\HitResolution.cs" />
+    <Compile Include="modules\LineOfSight.cs" />
+    <Compile Include="modules\Melee.cs" />
+    <Compile Include="modules\RollCorrection.cs" />
+    <Compile Include="modules\RollModifier.cs" />
+    <Compile Include="modules\HitLocation.cs" />
+    <Compile Include="modules\Targetting.cs" />
+    <Compile Include="modules\UserInterfacePanels.cs" />
+    <Compile Include="modules\HeauUpDisplay.cs" />
+    <Compile Include="modules\GameData.cs" />
+    <Compile Include="modules\WeaponInformation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mod.json" />
-    <None Include="changelog.txt" />
+    <None Include="..\mod.json" />
+    <None Include="..\changelog.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct( "AttackImprovementMod" )]
-[assembly: AssemblyCopyright( "Copyright © Ho Yiu Yeung 2018" )]
+[assembly: AssemblyCopyright( "Ho Yiu Yeung 2018 : Updated by XSNomad 2021 for BATTLETECH 1.9.1" )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "3.1.0.31" )]
-[assembly: AssemblyFileVersion( "3.1.0.31" )]
+[assembly: AssemblyVersion( "4.0.0.0" )]
+[assembly: AssemblyFileVersion( "4.0.0.0" )]
 [assembly: NeutralResourcesLanguage( "en-GB" )]
 
