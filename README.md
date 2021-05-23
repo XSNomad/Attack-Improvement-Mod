@@ -12,22 +12,7 @@
 
    .warn { font-weight: bold; color: red; clear: both; float: left; }
 </style>
-<script>
-// TOC https://ecotrust-canada.github.io/markdown-toc/
-// MD to HTML https://www.browserling.com/tools/markdown-to-html
 
-/* // Convert settings to <details>.
-// Disabled because I'll be asking users to click them open one by one
-document.addEventListener( 'DOMContentLoaded', () => {
-   Array.from( document.querySelectorAll( 'blockquote' ) ).forEach( e => {
-      const title = e.previousElementSibling;
-      if ( title.tagName !== 'P' ) return;
-      e.insertAdjacentHTML( 'afterend', `<details><summary>${title.innerHTML}</summary>${e.innerHTML}</details>` );
-      title.remove(); e.remove();
-   } );
-} );
-*/
-</script>
 <body>
    <h1 id="AIM4.0">Attack Improvement Mod 4.0.0 Development Alpha"</h1>
 
