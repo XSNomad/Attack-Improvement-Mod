@@ -334,10 +334,10 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             me.LineTemplate.endWidth = Width;
             me.MaterialInRange = GetMaterial();
             LazySingletonBehavior<UIManager>.Instance.UILookAndColorConstants.LOSLockedTarget.color  = LazySingletonBehavior<UIManager>.Instance.UILookAndColorConstants.LOSInRange.color = me.MaterialInRange.color;
-            //if ( IsMultifire ) {
-               //me.color LOSUnlockedTarget = me.LOSLockedTarget = me.LOSMultiTargetKBSelection = me.MaterialInRange.color;
-               //me.LOSUnlockedTarget.a *= 0.8f;
-            //}
+            if ( IsMultifire ) {
+                    LazySingletonBehavior<UIManager>.Instance.UILookAndColorConstants.LOSUnlockedTarget.color = LazySingletonBehavior<UIManager>.Instance.UILookAndColorConstants.LOSLockedTarget.color = LazySingletonBehavior<UIManager>.Instance.UILookAndColorConstants.LOSMultiTargetKBSelection.color = me.MaterialInRange.color;
+                    LazySingletonBehavior<UIManager>.Instance.UILookAndColorConstants.LOSUnlockedTarget.color.a *= 0.8f;
+            }
             return this;
          }
 
