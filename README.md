@@ -1,20 +1,5 @@
-<html><head><meta charset="utf-8">
-<title>BATTLETECH Attack Improvement Mod</title>
-<style>
-   body { margin: 0 auto; max-width: 800px; font-family: sans-serif; }
-   p, li { font-size: 1.1rem; margin-bottom: 1ex; margin-top: 1ex; }
-   h1, h2, h3 { display: inline-block; margin: 0.5ex 0; }
-   h1 { font-size: 1.5rem; }
-   ul, ol { margin-top: 0.5ex; }
-   a { text-decoration: none; }
-   a:hover { text-decoration: underline; }
-   dt { margin-top: 0.5ex; }
-
-   .warn { font-weight: bold; color: red; clear: both; float: left; }
-</style>
-
 <body>
-   <h1 id="AIM4.0">Attack Improvement Mod 4.0.0 Development Alpha"</h1>
+   <h1 id="AIM4.0">Attack Improvement Mod 4.0.0 Development Alpha</h1>
 
 <p>For BATTLETECH 1.9.1R686(Final) ModTek 8.0 Compatible</p>
 
@@ -1403,4 +1388,4 @@ License: <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL v3</a></p>
 <li>And many more players on the BattleTechGame discord that gave comments and ideas.</li>
 </ul>
 
-<p>Despite feature overlap with some mods, this mod does not reference or use their code due to lack of license, and in most cases the approaches are different.</p>
+<p>Despite feature overlap with some mods, this mod does not reference or use their code due to lack of license, and in most cases the approaches are different.</p></html>
