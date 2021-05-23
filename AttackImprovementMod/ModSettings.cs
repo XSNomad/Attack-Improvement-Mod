@@ -111,7 +111,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       public string ShowAllyHealth = ", HP {2}/{3}";
 
       [ JsonComment( "Set name colour of overhead nameplate of Player / Enemy / Ally.  Default \"#CFC\", \"#FBB\", \"#8FF\".  Set to empty to not change (leave at white)." ) ]
-      public string NameplateColourPlayer = "#CFC";
+      public string NameplateColourPlayer = "#BFB";
       public string NameplateColourEnemy = "#FBB";
       public string NameplateColourAlly = "#8FF";
 
@@ -131,7 +131,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ JsonComment( new string[]{
         "Make obstruction marker bigger or smaller by multiplying its height and width.  Default 1.5.",
         "Set to 1 to use game default, or 0 to hide the marker." } ) ]
-      public decimal LOSMarkerBlockedMultiplier = 1.5m;
+      public decimal LOSMarkerBlockedMultiplier = 2.0m;
 
       [ JsonComment( "Controls whether indirect firing lines / can't fire lines are dotted.  Default both true." ) ]
       public bool LOSIndirectDotted = true;
@@ -143,14 +143,14 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       public bool LOSBlockedPreDotted  = false;
       public bool LOSBlockedPostDotted = false;
 
-      [ JsonComment( new string[]{
+        [JsonComment(new string[]{
       "Change firing line colour (html syntax). \"#FF0000\" is red, \"#00FF00\" is green etc.  Set to empty to leave alone.",
-      "The colour orders are Front, Left, Right, Back, Prone.  Set to empty string to use game default." }  ) ]
-      public string LOSMeleeColors = "#F00,#0FF,#0FF,#0F8,#F00";
-      public string LOSClearColors = "#F00,#0FF,#0FF,#0F8,#F00";
-      public string LOSBlockedPreColors  = "#D0F,#D0F,#D0F,#D0F,#D0F";
-      public string LOSBlockedPostColors = "#C8E,#C8E,#C8E,#C8E,#C8E";
-      public string LOSIndirectColors = "#F00,#0FF,#0FF,#0F8,#F00";
+      "The colour orders are Front, Left, Right, Back, Prone.  Set to empty string to use game default." })]
+        public string LOSMeleeColors = "#0FF,#0FF,#0F8,#F00";
+      public string LOSClearColors = "#FF0000FF,#0FF,#0FF,#0F8,#F00";
+      public string LOSBlockedPreColors = "#FF6215,#D8F,#D8F,#DF8,#D0F";
+      public string LOSBlockedPostColors = "#E6E600,#BBF,#BBF,#BFB,#D0F";
+      public string LOSIndirectColors = "#3333CC,#2C88D3,#2C88D3,#2CD3CB,#24A8A2";
       public string LOSNoAttackColors = "";
 
       [ JsonComment( "Range and speed (in half-cycle ms) of firing line animation." ) ]
@@ -165,8 +165,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ JsonComment( new string[]{
         "Change marker colour of the facing indicator. Colours are for Front, Left, Right, Back, Prone.",
         "Default Player \"#FFFA,#CFCA,#CFCA,#AFAC,#FF8A\", Enemy \"#FFFA,#FCCA,#FCCA,#FAAC,#FF8A\", Target \"#F41F,#F41F,#F41F,#F41F,#F41F\"." } ) ]
-      public string FacingMarkerPlayerColors = "#FFFA,#CFCA,#CFCA,#AFAC,#FF8A";
-      public string FacingMarkerEnemyColors  = "#FFFA,#FCCA,#FCCA,#FAAC,#FF8A";
+      public string FacingMarkerPlayerColors = "#FFFF,#CCFF,#CCFF,#BFBF,#FFBF";
+      public string FacingMarkerEnemyColors  = "#FFFF,#CCFF,#CCFF,#FBBF,#FFBF";
       public string FacingMarkerTargetColors = "#F41F,#F41F,#F41F,#F41F,#F41F";
 
       //
@@ -190,12 +190,12 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ JsonComment( new string[]{
         "Increase or decrease called shot multiplier against mech.  0 to disable called shot, 1 is original strength.",
         "Default is 0.33 to counter the effect of CalledShotClusterStrength." } ) ]
-      public decimal MechCalledShotMultiplier = 0.33m;
+      public decimal MechCalledShotMultiplier = 0.25m;
 
       [ JsonComment( new string[]{
         "Increase or decrease called shot multiplier against mech.  0 to disable called shot, 1 is original strength.",
         "Default is 0.75 to balance vehicle's lower number of locations." } ) ]
-      public decimal VehicleCalledShotMultiplier = 0.75m;
+      public decimal VehicleCalledShotMultiplier = 0.5m;
 
       [ JsonComment( "Override called shot percentage display of mech locations to show modded shot distribution. Default true." ) ]
       public bool ShowRealMechCalledShotChance = true;
@@ -206,10 +206,10 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ JsonComment( new string[]{
         "Format of called shot location percentages, in C# String.Format syntax.",
         "Use \"{0:0.0}%\" to *always* show one decimal, or \"{0:0.#}%\" for *up to* one decimal. Default is \"\" to leave alone." } ) ]
-      public string CalledChanceFormat = "";
+      public string CalledChanceFormat = "{0:0.0}%";
 
       //
-       [ JsonSection( "Individual To Hit Modifiers" ) ]
+        [ JsonSection( "Individual To Hit Modifiers" ) ]
       //
 
       [ JsonComment( "Modify base weapon hit chance.  -0.05 to make all base accuracy -5%, 0.1 to make them +10% etc.  Default 0." ) ]
@@ -233,7 +233,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       public int ToHitVehicleFromRear = -2;
 
       [ JsonComment( "Hit modifier after jumping, added on top of movement modifier (if any).  Effective only if \"Jumped\" is in the modifier factor list(s).  Default 0." ) ]
-      public int ToHitSelfJumped = 0;
+      public int ToHitSelfJumped = 2;
 
       //
        [ JsonSection( "Net To Hit Modifiers" ) ]
@@ -253,8 +253,8 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ JsonComment( new string[]{
         "Max and min hit chance after all modifiers but before roll correction. Default 0.95 and 0.05, same as game default.",
         "Note that 100% hit chance (max) may still miss if roll correction is enabled." } ) ]
-      public decimal MaxFinalHitChance = 0.95m;
-      public decimal MinFinalHitChance = 0.05m;
+      public decimal MaxFinalHitChance = 0.90m;
+      public decimal MinFinalHitChance = 0.00m;
 
       [ JsonComment( "Make hit chance modifier has diminishing return rather than simple add and subtract.  Default false." ) ]
       public bool DiminishingHitChanceModifier = false;
@@ -297,7 +297,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       [ JsonComment( new string[]{
         "Set miss streak breaker threshold.  Only attacks with hit rate above the threshold will add to streak breaker.",
         "Default is 0.5, same as game default.  Set to 1 to disable miss streak breaker." } ) ]
-      public decimal MissStreakBreakerThreshold = 0.5m;
+      public decimal MissStreakBreakerThreshold = 1.0m;
 
       [ JsonComment( new string[]{
         "Set miss streak breaker divider.  Set to negative integer or zero to make it a constant bonus, e.g. -5 = 5% bonus per miss.",
@@ -331,7 +331,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
         "Format of called shot location percentages, in C# String.Format syntax.",
         "Game default is \"{0:0}%\". Use \"{0:0.0}%\" to *always* show one decimal, or \"{0:0.#}%\" for *up to* one decimal.",
         "Default is \"\", which will use \"{0:0.#}%\" if HitChanceStep is 0 and DiminishingHitChanceModifier is false, otherwise leave alone." } ) ]
-      public string HitChanceFormat = "";
+      public string HitChanceFormat = "{0:0.0}%";
 
       //
       [ JsonSection( "Melee and DFA" ) ]
@@ -367,12 +367,12 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
       //
 
       [ JsonComment( "When target is dead, skip \"critical\" or \"damage\" processing.  Default \"critical\".  Empty to not skip anything." ) ]
-      public string SkipBeatingDeadMech = "critical";
+      public string SkipBeatingDeadMech = "damage";
 
       [ JsonComment( new string[] {
         "Overrides AICritChanceBaseMultiplier in CombatGameConstants.json.  Default 0.2, same as game.",
         "Set to 1 for same crit chance as players, or set to 0 to prevent enemies and/or allies from dealing crit." } ) ]
-      public decimal CritChanceEnemy = 0.2m;
+      public decimal CritChanceEnemy = 1.0m;
       public decimal CritChanceAlly = 1;
 
       [ JsonComment( "Critical rate on vehicles and turrets, relative to mech.  Set to 0 to disable." ) ]
@@ -393,7 +393,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
         "A weapon must deal this much total damage to a location for through armour crit to roll.  Default 9.  Set to 0 for no threshold.",
         "A number between 0 and 1 (exclusive) means a fraction of max armour, 0 and -1 means a fraction of current armour,",
         "while 1 and above means a fixed damage threshold." } ) ]
-      public decimal ThroughArmorCritThreshold = 9;
+      public decimal ThroughArmorCritThreshold = -1;
 
       [ JsonComment( new string[]{
         "Base crit chance of a location with zero armour but full structure.  Works by fully replacing mech crit system.",
@@ -405,7 +405,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
         "Base crit chance of a location with full armour.  Must not be higher than ThroughArmorCritChanceZeroArmor.",
         "Actual through armour crit rate is between this and zero armour chance.  Default 0.  Can be -1 to 1, e.g. 0.1 for 10%.",
         "If negative, crits will not happen until armour is sufficiently weakened." } ) ]
-      public decimal CritChanceFullArmor = 0;
+      public decimal CritChanceFullArmor = -1;
 
       [ JsonComment( "Base crit chance of a structurally hit location if it is at zero structure, can be 0 to 1.  Default 1, same as game." ) ]
       public decimal CritChanceZeroStructure = 1;
@@ -443,7 +443,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
 
       [ JsonComment( "When an ammo is useless, such as because the weapon is destroyed, eject the ammo at end of turn if not prone.  Default true for friends." ) ]
       public bool AutoJettisonAmmo = true;
-      public bool AutoJettisonEnemyAmmo = false;
+      public bool AutoJettisonEnemyAmmo = true;
 
       [ JsonComment( "Increase hit distribution precision for degrading called shots.  Default true." ) ]
       public bool FixHitDistribution = true;
