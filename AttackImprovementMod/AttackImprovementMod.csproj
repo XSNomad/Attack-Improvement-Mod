@@ -107,7 +107,7 @@
     <Compile Include="modules\HitLocation.cs" />
     <Compile Include="modules\Targetting.cs" />
     <Compile Include="modules\UserInterfacePanels.cs" />
-    <Compile Include="modules\HeauUpDisplay.cs" />
+    <Compile Include="modules\HeadsUpDisplay.cs" />
     <Compile Include="LEGACY\GameData.cs" />
     <Compile Include="modules\WeaponInformation.cs" />
   </ItemGroup>

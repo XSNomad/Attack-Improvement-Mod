@@ -43,7 +43,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             Patch( SlotType, "OnPointerUp", null, "RefreshTotalDamage" );
          }
          if ( Settings.CalloutWeaponStability )
-            HeauUpDisplay.HookCalloutToggle( ToggleStabilityDamage );
+            HeadsUpDisplay.HookCalloutToggle( ToggleStabilityDamage );
 
          if ( HasMod( "com.joelmeador.WeaponRealizer", "WeaponRealizer.Core" ) ) TryRun( ModLog, InitWeaponRealizerBridge );
       }

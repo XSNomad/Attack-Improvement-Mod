@@ -33,7 +33,7 @@ namespace Sheepy.BattleTechMod.AttackImprovementMod {
             // Force move/distance number refresh
             Patch( typeof( SelectionStateMove ), "ProcessMousePos", null, "RefreshMoveAndDist" );
             Patch( typeof( SelectionStateJump ), "ProcessMousePos", null, "RefreshMoveAndDist" );
-            HeauUpDisplay.HookCalloutToggle( RefreshTargetInfo );
+            HeadsUpDisplay.HookCalloutToggle( RefreshTargetInfo );
          }
          if ( Settings.FixHeatPreview )
             Patch( typeof( Mech ), "get_AdjustedHeatsinkCapacity", null, "CorrectProjectedHeat" );
